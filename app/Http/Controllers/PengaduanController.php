@@ -14,7 +14,8 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        return view('masyarakat.index');
+        $pengaduan = Pengaduan::where('id_user', auth()->user()->id)->get()->all();
+        return view('masyarakat.index', compact('pengaduan'));
     }
 
     /**
@@ -58,9 +59,11 @@ class PengaduanController extends Controller
      * @param  \App\Models\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-    public function show(Pengaduan $pengaduan)
+    public function show($id)
     {
-        //
+        $pengaduan = Pengaduan::find($id);
+        return view('masyarakat.detail',compact('pengaduan'));
+
     }
 
     /**
