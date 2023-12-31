@@ -10,23 +10,24 @@
                 <div class="card-body">
                     <div class="row m-1">
                         <div class="col-md-4">
-                            <form action="{{route('petugas.store')}}" method="post">
+                            <form action="{{route('petugas.update', $user->id)}}" method="post">
                                 @csrf
+                                {{method_field('PUT')}}
                                 <div class="form-group mt-2">
                                     <label>Nama Lengkap</label>
-                                    <input type="text" name="name" class="form-control">
+                                    <input type="text" name="name" value="{{$user->name}}" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label>Username</label>
-                                    <input type="text" name="username" class="form-control">
+                                    <input type="text" name="username" value="{{$user->username}}" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label>NIK</label>
-                                    <input type="text" name="nik" maxlength="16" class="form-control">
+                                    <input type="text" name="nik" value="{{$user->nik}}" maxlength="16" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label>Telepon</label>
-                                    <input type="text" name="telp" maxlength="16" class="form-control">
+                                    <input type="text" name="telp" value="{{$user->telp}}" maxlength="16" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label>Password</label>
@@ -40,31 +41,32 @@
                         </div>
                         <div class="col-md-8">
                             <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
+                                <table class="table table-bordered">
+                                    <tr>
                                         <th>Nama Lengkap</th>
+                                        <td>:</td>
+                                        <td>{{$user->name}}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Username</th>
-                                        <th>Telpon</th>
-                                        <th>Action</th>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($user as $row)
-                                        @if($row->role === 'petugas')
-                                        <tr>
-                                            <td>{{$row->name}}</td>
-                                            <td>{{$row->username}}</td>
-                                            <td>{{$row->telp}}</td>
-                                            <td>
-                                                <form action="#" method="post">
-                                                    @csrf 
-                                                    <a href="{{route('petugas.show', $row->id)}}" class="btn btn-info">Detail</a>
-                                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                        @endforeach
-                                    </tbody>
+                                        <td>:</td>
+                                        <td>{{$user->username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Telepon</th>
+                                        <td>:</td>
+                                        <td>{{$user->telp}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nomor Induk Kependudukan (NIK)</th>
+                                        <td>:</td>
+                                        <td>{{$user->nik}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Role</th>
+                                        <td>:</td>
+                                        <td>{{$user->role}}</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>

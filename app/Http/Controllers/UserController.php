@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -14,7 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('petugas.index');
+        $user = User::all();
+        return view('petugas.index', compact('user'));
     }
 
     /**
@@ -35,7 +39,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        if($request->input('password'))
+        {
+            $input['password'] = Hash::make($input['password']);
+        }
+        User::create($input);
+        return back();
     }
 
     /**
@@ -46,7 +56,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('petugas.detail', compact('user'));
     }
 
     /**
@@ -69,7 +80,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $input = $request->all();
+        if($request->input('password'))
+        {
+            $input['password'] = Hash::make($input['password']);
+        }else
+        {
+            $input = Arr::except($input,['password']);
+        }
+        dd($input);
     }
 
     /**
