@@ -55,10 +55,11 @@
                                             <td>{{$row->username}}</td>
                                             <td>{{$row->telp}}</td>
                                             <td>
-                                                <form action="#" method="post">
+                                                <form action="{{route('petugas.destroy', $row->id)}}" method="post">
                                                     @csrf 
+                                                    {{method_field('DELETE')}}
                                                     <a href="{{route('petugas.show', $row->id)}}" class="btn btn-info">Detail</a>
-                                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah {{$row->name}} akan dihapus?')">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>

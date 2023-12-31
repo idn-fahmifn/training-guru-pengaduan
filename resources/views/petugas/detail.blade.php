@@ -35,7 +35,7 @@
                                 </div>
                                 <input type="hidden" name="role" value="petugas">
                                 <div class="form-group mt-2">
-                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </form>
                         </div>

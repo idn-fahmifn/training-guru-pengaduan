@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $user = User::all();
@@ -89,7 +90,8 @@ class UserController extends Controller
         {
             $input = Arr::except($input,['password']);
         }
-        dd($input);
+        $user->update($input);
+        return redirect('/petugas');
     }
 
     /**
@@ -100,6 +102,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = User::find($id);
+        $data->delete();
+        return back();
     }
 }
