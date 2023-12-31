@@ -14,7 +14,7 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        //
+        return view('masyarakat.index');
     }
 
     /**
@@ -35,7 +35,21 @@ class PengaduanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        if($request->hasFile('foto'))
+        {
+            $destination_path = 'public/images/dokumentasi';
+            $image = $request->file('foto');
+            $name = $image->getClientOriginalName();
+            $path = $request->file('foto')->storeAs($destination_path, $name);
+            $input['foto'] = $name;
+        }
+        $now = date('Y-m-d');
+        $input['tanggal_pengaduan'] = $now;
+        Pengaduan::create($input);
+        return back();
+
+
     }
 
     /**
